@@ -12,7 +12,21 @@ using namespace Garfield;
 int main(int argc, char * argv[]) {
 
   // TApplication app("app", &argc, argv);
- 
+
+  ComponentAnalyticField* cmp = new ComponentAnalyticField(); 
+  const double rWire = 25.e-4;
+  const double rTube = 1.46;
+  const double lTube = 10.;
+  GeometrySimple* geo = new GeometrySimple()
+  SolidTube* tube = new SolidTube(0., 0., 0., rWire, rTube, lTube);
+  geo->AddSolid(tube, gas);
+  cmp->SetGeometry(geo);
+  const double vWire = 3270.;
+  const double vTube = 0.;
+  cmp->AddWire(0., 0., 2 * rWire, vWire, "s");
+  cmp->AddTube(rTube, vTube, 0, "t");
+  cmp->AddReadout("s");
+  
   const double pressure = 3 * AtmosphericPressure;
   const double temperature = 293.15;
  
