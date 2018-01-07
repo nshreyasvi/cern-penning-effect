@@ -48,28 +48,37 @@ int main(int argc, char * argv[]) {
   }
 
   // Setup the gas.
+  const int ncoll = 10;
+  const bool verbose = true;
   MediumMagboltz* gas = new MediumMagboltz();
-  gas->SetComposition("ar", 80., "co2", 20.);
-  gas->SetTemperature(293.15);
+  gas->SetComposition("ar", 93., "co2", 7.);
+  gas->SetTemperature(298);
   gas->SetPressure(760.);
   gas->EnableDebugging();
-  gas->Initialise();  
+  gas->Initialise();
   gas->DisableDebugging();
+  gas->SetFieldGrid(100., 40.e3, 70, true);
+  gas->GenerateGasTable(ncoll, verbose);
+  gas->WriteGasFile("ar_93_co2_7.gas");
+  gas->PrintGas();
+
   // Set the Penning transfer efficiency.
-  const double rPenning = 0.51;
+  const double rPenning = 0.60;
   const double lambdaPenning = 0.;
   gas->EnablePenningTransfer(rPenning, lambdaPenning, "ar");
+
   // Load the ion mobilities.
   const std::string path = getenv("GARFIELD_HOME");
   gas->LoadIonMobility(path + "/Data/IonMobility_Ar+_Ar.txt");
-  // Associate the gas with the corresponding field map material. 
+
+  // Associate the gas with the corresponding field map material.
   const unsigned int nMaterials = fm->GetNumberOfMaterials();
   for (unsigned int i = 0; i < nMaterials; ++i) {
     const double eps = fm->GetPermittivity(i);
     if (eps == 1.) fm->SetMedium(i, gas);
   }
   fm->PrintMaterials();
-
+  
   // Create the sensor.
   Sensor* sensor = new Sensor();
   sensor->AddComponent(fm);
@@ -95,6 +104,7 @@ int main(int argc, char * argv[]) {
   const int nEvents = 10;
   for (int i = nEvents; i--;) { 
     if (debug || i % 10 == 0) std::cout << i << "/" << nEvents << "\n";
+
     // Randomize the initial position. 
     double x0 = -pitch / 2. + RndmUniform() * pitch;
     double y0 = -pitch / 2. + RndmUniform() * pitch;
@@ -118,13 +128,12 @@ int main(int argc, char * argv[]) {
                                xi2, yi2, zi2, ti2, status);
     }
   }
-  
+
   if (plotDrift) {
     TCanvas* cd = new TCanvas();
     driftView->SetCanvas(cd);
     driftView->Plot();
   }
-
   app.Run(kTRUE);
 
 }
