@@ -5,10 +5,9 @@ HEEDDIR = $(GARFIELD_HOME)/Heed
 LIBDIR = $(GARFIELD_HOME)/Library
 
 # Compiler flags
-CXX = `root-config --cxx`
-CFLAGS = `root-config --cflags` \
-	-O3 -W -Wall -Wextra -Wno-long-long \
-	-fno-common \
+CFLAGS = -Wall -Wextra -Wno-long-long \
+	`root-config --cflags` \
+	-O3 -fno-common -c \
 	-I$(INCDIR) -I$(HEEDDIR)
 
 # Debug flags
@@ -16,9 +15,9 @@ CFLAGS = `root-config --cflags` \
 
 LDFLAGS = -L$(LIBDIR) -lGarfield
 LDFLAGS += `root-config --glibs` -lGeom -lgfortran -lm
+# LDFLAGS += -g
 
-penning: penning.C
-	$(CXX) $(CFLAGS) -c penning.C
-	$(CXX) $(CFLAGS) -o penning penning.o $(LDFLAGS)
-	rm penning.o
-
+gem: gem.C 
+	$(CXX) $(CFLAGS) gem.C
+	$(CXX) `root-config --cflags` -o gem gem.o $(LDFLAGS)
+	rm gem.o
