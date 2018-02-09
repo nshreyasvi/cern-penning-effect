@@ -54,7 +54,7 @@ int main(int argc, char * argv[]) {
   gas->SetComposition("ar", 93., "co2", 7.);
   gas->SetTemperature(298);
   gas->SetPressure(760.);
-  gas->SetFieldGrid(20., 20.e3, 100, true, 100., 100.e3, 20, 100., 100.e3, 20);
+  gas->SetFieldGrid(1., 10., 20, true, 1., 10., 20, 1., 10., 20);
   gas->EnableDebugging();
   gas->Initialise();
   gas->DisableDebugging();
