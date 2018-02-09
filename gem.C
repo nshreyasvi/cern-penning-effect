@@ -48,7 +48,7 @@ int main(int argc, char * argv[]) {
   }
 
   // Setup the gas.
-  const int ncoll = 10;
+  const int ncoll = 3;
   const bool verbose = true;
   MediumMagboltz* gas = new MediumMagboltz();
   gas->SetComposition("ar", 93., "co2", 7.);
