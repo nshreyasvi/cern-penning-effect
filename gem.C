@@ -54,14 +54,14 @@ int main(int argc, char * argv[]) {
   gas->SetComposition("ar", 93., "co2", 7.);
   gas->SetTemperature(298);
   gas->SetPressure(760.);
+  gas->SetFieldGrid(20., 20.e3, 100, true, 100., 100.e3, 20, 100., 100.e3, 20);
   gas->EnableDebugging();
   gas->Initialise();
   gas->DisableDebugging();
-  gas->SetFieldGrid(100., 40.e3, 70, true);
   gas->GenerateGasTable(ncoll, verbose);
   gas->WriteGasFile("ar_93_co2_7.gas");
   gas->PrintGas();
-
+  
   // Set the Penning transfer efficiency.
   const double rPenning = 0.60;
   const double lambdaPenning = 0.;
@@ -86,6 +86,7 @@ int main(int argc, char * argv[]) {
                    5 * pitch,  5 * pitch,  0.025);
 
   AvalancheMicroscopic* aval = new AvalancheMicroscopic();
+  aval->EnableMagneticField();
   aval->SetSensor(sensor);
 
   AvalancheMC* drift = new AvalancheMC();
