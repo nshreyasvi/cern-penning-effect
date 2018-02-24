@@ -48,13 +48,13 @@ int main(int argc, char * argv[]) {
   }
 
   // Setup the gas.
-  const int ncoll = 3;
+  const int ncoll = 1;
   const bool verbose = true;
   MediumMagboltz* gas = new MediumMagboltz();
   gas->SetComposition("ar", 93., "co2", 7.);
   gas->SetTemperature(298);
   gas->SetPressure(760.);
-  gas->SetFieldGrid(1., 10., 20, true, 1., 10., 20, 1., 10., 20);
+  gas->SetFieldGrid(100., 25.e3, 5, true, 1., 10., 5, 1., 10., 5);
   gas->EnableDebugging();
   gas->Initialise();
   gas->DisableDebugging();
@@ -113,7 +113,7 @@ int main(int argc, char * argv[]) {
     double t0 = 0.;
     double e0 = 0.1;
     aval->AvalancheElectron(x0, y0, z0, t0, e0, 0., 0., 0.);
-    int ne = 0, ni = 0;
+    int ne = 1, ni = 0;
     aval->GetAvalancheSize(ne, ni);
     const int np = aval->GetNumberOfElectronEndpoints();
     double xe1, ye1, ze1, te1, e1;
