@@ -61,7 +61,7 @@ int main(int argc, char * argv[]) {
   gas->GenerateGasTable(ncoll, verbose);
   gas->WriteGasFile("ar_93_co2_7.gas");
   gas->PrintGas();
-  
+  gas->GenerateGasTable(ncoll);
   // Set the Penning transfer efficiency.
   const double rPenning = 0.60;
   const double lambdaPenning = 0.;
@@ -72,6 +72,7 @@ int main(int argc, char * argv[]) {
   gas->LoadIonMobility(path + "/Data/IonMobility_Ar+_Ar.txt");
 
   // Associate the gas with the corresponding field map material.
+  
   const unsigned int nMaterials = fm->GetNumberOfMaterials();
   for (unsigned int i = 0; i < nMaterials; ++i) {
     const double eps = fm->GetPermittivity(i);
