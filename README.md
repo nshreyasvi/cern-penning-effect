@@ -22,4 +22,4 @@ Gas tables can be found in the file ar_93_co2_7.gas and ionization and excitatio
 Apart from that, I edited the gem.C file in the examples section in order to make this program and the edited program can also be found in the same repository.
 
 ## Results:
-The results of ionization and excitation states can be used by the Ozkan program in order to find transfer probabilities for each collision and fetch those values to get the final penning transfer values.
+The results of ionization and excitation states can be used by the other program in order to find transfer probabilities for each collision and fetch those values to get the final penning transfer values for each of the collision.
