@@ -20,6 +20,7 @@ I then tried to print out gas tables with an electric and magnetic field mesh fo
 Therefore, I carried out the simulations and got the gas tables as well as ionization and excitation rates for the mixture under the electric and magnetic field. 
 Gas tables can be found in the file ar_93_co2_7.gas and ionization and excitation rates along with other data can be found in the file printed_results.gas here.
 Apart from that, I edited the gem.C file in the examples section in order to make this program and the edited program can also be found in the same repository.
+![Result](https://github.com/nshreyasvi/cern-penning-effect/blob/master/result_svg.svg)
 
 ## Results:
 The results of ionization and excitation states can be used by the other program in order to find transfer probabilities for each collision and fetch those values to get the final penning transfer values for each of the collision.
